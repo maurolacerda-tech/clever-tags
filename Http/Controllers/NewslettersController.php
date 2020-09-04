@@ -107,8 +107,8 @@ class NewslettersController extends Controller
             abort(403, 'Você não tem permissão para gerenciar esta página');
 
         $data = $request->only(array_keys($request->rules()));
-        $service->fill($data);
-        $service->save();
+        $newsletter->fill($data);
+        $newsletter->save();
         return redirect()->back()->with('success','Atualizado com sucesso');
     }
 
