@@ -19,13 +19,15 @@ class NewsletterRequest extends FormRequest
             return [
                 'name'  => 'nullable|max:191',
                 'email' => "required|string|email|max:191|unique:newsletters,email",
-                'phone' => "nullable|max:191"
+                'phone' => "nullable|max:191",
+                'menu_id' => "required|numeric"
             ];
         }else{
             return [
                 'name'  => 'nullable|max:191',
                 'email' => "required|string|email|max:191|unique:newsletters,email,{$this->newsletter->id},id",
-                'phone' => "nullable|max:191"
+                'phone' => "nullable|max:191",
+                'menu_id' => "required|numeric"
             ];
         }
     }
