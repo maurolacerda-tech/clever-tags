@@ -1,0 +1,25 @@
+{
+    "name": "maurolacerda-tech/clever-newsletters",
+    "description": "Módulo de criação de newsletter do CMS da cleverweb.com.br",
+    "authors": [
+        {
+            "name": "maurolacerda-tech",
+            "email": "contato@maurolacerda.com.br"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Newsletters\\": "./"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Newsletters\\Providers\\NewsletterServiceProvider"
+            ]
+        }
+    }
+}
