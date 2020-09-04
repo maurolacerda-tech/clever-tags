@@ -31,6 +31,7 @@
 
         <div class="card-body">
             {{ Form::model($newsletter, ['url' => ['/panel/'.$slug, $newsletter->id], 'method' => 'PUT', 'files' => true ]) }}
+                {{ Form::hidden('id', $newsletter->id) }}
                 @include('Newsletter::_form')                        
                 <div class="col-sm-12 text-right">
                     <a href="{{ url('/panel/'.$slug) }}" class="text-orange">Cancelar</a>

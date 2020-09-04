@@ -23,9 +23,10 @@ class NewsletterRequest extends FormRequest
                 'menu_id' => "required|numeric"
             ];
         }else{
+            $id = $this->request->get('id');
             return [
                 'name'  => 'nullable|max:191',
-                'email' => "required|string|email|max:191|unique:newsletters,email,{$this->newsletter->id},id",
+                'email' => "required|string|email|max:191|unique:newsletters,email,{$id},id",
                 'phone' => "nullable|max:191",
                 'menu_id' => "required|numeric"
             ];
