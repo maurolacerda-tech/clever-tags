@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Newsletters\Http\Controllers;
+namespace Modules\Tags\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -10,11 +10,11 @@ use Gate;
 
 use App\Helpers\Functions;
 use App\Models\Menu;
-use Modules\Newsletters\Models\Newsletter;
+use Modules\Tags\Models\Tag;
 
-use Modules\Newsletters\Http\Requests\NewsletterRequest;
+use Modules\Tags\Http\Requests\TagRequest;
 
-class NewslettersController extends Controller
+class TagsController extends Controller
 {
 
     protected $menu_id;
@@ -30,9 +30,9 @@ class NewslettersController extends Controller
         $menu = Menu::where('slug',$slug)->first();
         $this->slug = $slug;        
 
-        $this->folder = config('newsletters.folder');
+        $this->folder = config('tags.folder');
         if($menu){
-            $this->menu_id = $menu->id;
+            $this->menu_id = is_null($menu->parent_id) ? $menu->id : $menu->parent_id;
             $this->menu_icon = $menu->icons;
             $this->menu_name = $menu->name;
             $keysFilds = explode(',',$menu->fields_active);
@@ -44,7 +44,7 @@ class NewslettersController extends Controller
         }
     }
 
-    public function index(Request $request, Newsletter $newsletter)
+    public function index(Request $request, Tag $tag)
     {  
         if( Gate::denies("manager_{$this->slug}") ) 
             abort(403, 'Você não tem permissão para gerenciar esta página');
@@ -56,14 +56,14 @@ class NewslettersController extends Controller
         $combine_filds = $this->combine_filds;
 
         if(!is_null($menu_id)){
-            $newsletters = $newsletter->where('menu_id', $menu_id)->orderBy('name', 'asc')->paginate(50);
-            return view('Newsletter::index', compact('newsletters', 'menu_icon', 'menu_name', 'slug', 'combine_filds'));
+            $tags = $tag->where('menu_id', $menu_id)->orderBy('name', 'asc')->paginate(50);
+            return view('Tag::index', compact('tags', 'menu_icon', 'menu_name', 'slug', 'combine_filds'));
         }else{
             abort(403, 'Página não encontrada');
         }
     }
 
-    public function create(Newsletter $newsletter)
+    public function create(Tag $tag)
     {
         if( Gate::denies("manager_{$this->slug}") ) 
             abort(403, 'Você não tem permissão para gerenciar esta página');
@@ -74,20 +74,20 @@ class NewslettersController extends Controller
         $slug = $this->slug;
         $combine_filds = $this->combine_filds;
 
-        return view('Newsletter::create', compact('menu_id', 'menu_icon', 'menu_name', 'slug', 'combine_filds'));
+        return view('Tag::create', compact('menu_id', 'menu_icon', 'menu_name', 'slug', 'combine_filds'));
     }
 
-    public function store(NewsletterRequest $request)
+    public function store(TagRequest $request)
     {
         if( Gate::denies("manager_{$this->slug}") ) 
             abort(403, 'Você não tem permissão para gerenciar esta página');
 
         $data = $request->only(array_keys($request->rules()));
-        Newsletter::create($data);
+        Tag::create($data);
         return redirect()->back()->with('success','Adicionado com sucesso!');
     }
 
-    public function edit(Newsletter $newsletter)
+    public function edit(Tag $tag)
     {
         if( Gate::denies("manager_{$this->slug}") ) 
             abort(403, 'Você não tem permissão para gerenciar esta página');
@@ -98,26 +98,26 @@ class NewslettersController extends Controller
         $slug = $this->slug;
         $combine_filds = $this->combine_filds;
 
-        return view('Newsletter::edit', compact('newsletter', 'menu_id', 'menu_icon', 'menu_name', 'slug', 'combine_filds'));
+        return view('Tag::edit', compact('tag', 'menu_id', 'menu_icon', 'menu_name', 'slug', 'combine_filds'));
     }
 
-    public function update(NewsletterRequest $request, Newsletter $newsletter)
+    public function update(TagRequest $request, Tag $tag)
     {
         if( Gate::denies("manager_{$this->slug}") ) 
             abort(403, 'Você não tem permissão para gerenciar esta página');
 
         $data = $request->only(array_keys($request->rules()));
-        $newsletter->fill($data);
-        $newsletter->save();
+        $tag->fill($data);
+        $tag->save();
         return redirect()->back()->with('success','Atualizado com sucesso');
     }
 
-    public function destroy(Newsletter $newsletter)
+    public function destroy(Tag $tag)
     {
         if( Gate::denies("manager_{$this->slug}") ) 
             abort(403, 'Você não tem permissão para gerenciar esta página');
         
-        $newsletter->delete();              
+        $tag->delete();              
         return redirect()->back()->with('success','Excluído com sucesso!');
     }    
 

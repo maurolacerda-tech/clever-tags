@@ -1,6 +1,6 @@
 {
-    "name": "maurolacerda-tech/clever-newsletters",
-    "description": "Módulo de criação de newsletter do CMS da cleverweb.com.br",
+    "name": "maurolacerda-tech/clever-tags",
+    "description": "Módulo de criação de tags do CMS da cleverweb.com.br",
     "authors": [
         {
             "name": "maurolacerda-tech",
@@ -12,13 +12,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Newsletters\\": "./"
+            "Modules\\Tags\\": "./"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\Newsletters\\Providers\\NewsletterServiceProvider"
+                "Modules\\Tags\\Providers\\TagServiceProvider"
             ]
         }
     }

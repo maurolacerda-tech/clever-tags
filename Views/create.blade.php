@@ -29,10 +29,10 @@
 <div class="row clearfix">
     <div class="card table-card"> 
         <div class="card-body">
-            {{ Form::open(['url' => 'panel/'.$slug.'/store', 'files' => true ]) }}
-                @include('Newsletter::_form')                        
+            {{ Form::open(['url' => 'panel/'.$slug.'/store' ]) }}
+                @include('Tag::_form')                        
                 <div class="col-sm-12 text-right">
-                    <a href="{{ route('admin.languages.index') }}" class="text-orange">Cancelar</a>
+                    <a href="{{ url('panel/'.$slug) }}" class="text-orange">Cancelar</a>
                     <button type="submit" class="btn2 btn-dark ml-2">Criar</button>
                 </div>
             {{ Form::close() }}

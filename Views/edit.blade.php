@@ -30,9 +30,9 @@
     <div class="card table-card"> 
 
         <div class="card-body">
-            {{ Form::model($newsletter, ['url' => ['/panel/'.$slug, $newsletter->id], 'method' => 'PUT', 'files' => true ]) }}
-                {{ Form::hidden('id', $newsletter->id) }}
-                @include('Newsletter::_form')                        
+            {{ Form::model($tag, ['url' => ['/panel/'.$slug, $tag->id], 'method' => 'PUT', 'files' => true ]) }}
+                {{ Form::hidden('id', $tag->id) }}
+                @include('Tag::_form')                        
                 <div class="col-sm-12 text-right">
                     <a href="{{ url('/panel/'.$slug) }}" class="text-orange">Cancelar</a>
                     <button type="submit" class="btn2 btn-dark ml-2">Atualizar</button>

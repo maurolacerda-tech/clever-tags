@@ -39,38 +39,33 @@
                 <table class="table table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>Nome</th>
-                            <th width="150">E-mail</th>
-                            <th width="150">Telefone</th> 
-                            <th width="100">Ação</th>
+                            <th>Tag</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse( $newsletters as $newsletter )
+                        @forelse( $tags as $tag )
                         <tr>                            
-                            <td>{{$newsletter->name}}</td>
-                            <td>{{$newsletter->email}}</td> 
-                            <td>{{$newsletter->phone}}</td> 
+                            <td>{{$tag->name}}</td>
                             <td>
-                                <a href="{{ url('panel/'.$slug.'/edit/'.$newsletter->id)}}" title="" data-toggle="tooltip" data-placement="top" data-original-title="editar" class="mr-2">
+                                <a href="{{ url('panel/'.$slug.'/edit/'.$tag->id)}}" title="" data-toggle="tooltip" data-placement="top" data-original-title="editar" class="mr-2">
                                     <i class="ik ik-edit f-16 mr-15 text-green"></i>
                                 </a>
 
 
-                                <a href="javascript:void(0);" data-toggle="modal" data-target="#deleteModal{{$newsletter->id}}" >
+                                <a href="javascript:void(0);" data-toggle="modal" data-target="#deleteModal{{$tag->id}}" >
                                     <i class="ik ik-trash-2 f-16 text-red"></i>
                                 </a>
 
-                                <div class="modal fade" id="deleteModal{{$newsletter->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{$newsletter->id}}Label" aria-hidden="true">
+                                <div class="modal fade" id="deleteModal{{$tag->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{$tag->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
-                                        {{ Form::open(['url' => ['panel/'.$slug.'/'.$newsletter->id], 'method' => 'DELETE', 'id' => 'form-delete'.$newsletter->id ]) }}
+                                        {{ Form::open(['url' => ['panel/'.$slug.'/'.$tag->id], 'method' => 'DELETE', 'id' => 'form-delete'.$tag->id ]) }}
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalCenterLabel">Excluir</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                Tem certeza que deseja excluir <i>"{{$newsletter->name}}"</i>
+                                                Tem certeza que deseja excluir <i>"{{$tag->name}}"</i>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn2 btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -91,8 +86,8 @@
                         @endforelse 
                     </tbody>
                 </table>
-                @if($newsletters instanceof \Illuminate\Pagination\LengthAwarePaginator )
-                    {{$newsletters->links()}}
+                @if($tags instanceof \Illuminate\Pagination\LengthAwarePaginator )
+                    {{$tags->links()}}
                 @endif
             </div>
 
