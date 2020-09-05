@@ -40,6 +40,7 @@
                     <thead>
                         <tr>
                             <th>Tag</th>
+                            <th width="100">Ação</th>
                         </tr>
                     </thead>
                     <tbody>
