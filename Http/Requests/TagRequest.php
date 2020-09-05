@@ -15,7 +15,8 @@ class TagRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'nullable|max:191'
+            'name'  => 'nullable|max:191',
+            'menu_id' => "required|numeric"
         ];
     }
 }
