@@ -14,9 +14,20 @@ class TagRequest extends FormRequest
 
     public function rules()
     {
-        return [
-            'name'  => 'nullable|max:191',
-            'menu_id' => "required|numeric"
-        ];
+        $method = $this->method();
+        if( strtoupper($method)=='POST'){
+            return [
+                'name'  => 'nullable|max:191',
+                'menu_id' => "required|numeric",
+                'slug' => "required|max:191|unique:tags,slug"
+            ];
+        }else{
+            $id = $this->request->get('id');
+            return [
+                'name'  => 'nullable|max:191',
+                'menu_id' => "required|numeric",
+                'slug' => "required|max:191|unique:tags,slug,{$id},id"
+            ];
+        }
     }
 }

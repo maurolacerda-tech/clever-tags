@@ -20,6 +20,7 @@ class CreateTagsTable extends Migration
             $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
 
             $table->string('name');
+            $table->string('slug')->unique()->nullable();
 
             $table->timestamps();
         });
